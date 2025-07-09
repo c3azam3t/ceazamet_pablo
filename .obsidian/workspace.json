@@ -1,0 +1,188 @@
+{
+  "main": {
+    "id": "8707df07cfd97aa7",
+    "type": "split",
+    "children": [
+      {
+        "id": "87130e6b635c74df",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "0d45914fb3164f42",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "CEAZA_FORECAST/scripts/preprocessing/wrf/01a descarga de forzantes GFS historico, 1 dia.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "01a descarga de forzantes GFS historico, 1 dia"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "5dcf782a3b205641",
+    "type": "split",
+    "children": [
+      {
+        "id": "ec018aaa085072eb",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "71231682abb27559",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "c6803bc036ea9513",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "93102e128cdfa6d4",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "6c0beda6fa2344f9",
+    "type": "split",
+    "children": [
+      {
+        "id": "b67b21cee75e964a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "21740f2af08943a7",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "0c6ab32623620ceb",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "63cd31c68050405e",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "9a33a3a5f817aae2",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "0d45914fb3164f42",
+  "lastOpenFiles": [
+    "CEAZA_FORECAST/scripts/preprocessing/wrf/02 ungrib y metgrid.md",
+    "CEAZA_FORECAST/scripts/preprocessing/wrf/01b descarga forzantes GFS hist, por lote.md",
+    "CEAZA_FORECAST/scripts/preprocessing/wrf/01a descarga de forzantes GFS historico, 1 dia.md",
+    "CEAZA_FORECAST/documentation/config/wrf/01 instalación.md",
+    "CEAZA_FORECAST/documentation/config/wrf",
+    "CEAZA_FORECAST/new fold/asdfasdf.md",
+    "CEAZA_FORECAST/new fold",
+    "CEAZA_FORECAST/scripts/preprocessing/wrf/down_ds084.1.sh",
+    "CEAZA_FORECAST/scripts/preprocessing/wrf/downGfsHist_2024Junio.sh",
+    "CEAZA_FORECAST/scripts/preprocessing/wrf",
+    "CEAZA_FORECAST/scripts/postprocessing/visualization",
+    "CEAZA_FORECAST/scripts/postprocessing/model",
+    "CEAZA_FORECAST/scripts/preprocessing",
+    "CEAZA_FORECAST/scripts/postprocessing",
+    "CEAZA_FORECAST/scripts/automation",
+    "README.md",
+    "Welcome.md"
+  ]
+}
