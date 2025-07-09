@@ -172,7 +172,8 @@ end
 ```
 
 
-en cada llamada al 2do script, se crean las carpetas con la fecha, en el subdirectorio ds084.1/ que se crea en el directorio actual al llamar a lote.sh
+en cada llamada al 2do script, se crean las carpetas con la fecha, en el subdirectorio ds084.1/ que se crea en el directorio actual.
+
 
 
 
