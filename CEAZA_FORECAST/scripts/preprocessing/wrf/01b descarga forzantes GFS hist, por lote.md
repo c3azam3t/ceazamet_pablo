@@ -1,6 +1,4 @@
-Para descargar un lote: 
-
-de fechas, ocupar estos 2 scripts:
+Ocupar estos 2 scripts:
 #### lote.sh
 
 ```bash
