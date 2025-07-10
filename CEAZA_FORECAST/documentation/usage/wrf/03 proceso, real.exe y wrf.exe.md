@@ -1,4 +1,6 @@
-en la carpeta de trabajo crear este script:
+En la etapa proceso se corre el modelo, donde son 2 los programas principales, real.exe y wrf.exe
+
+en la carpeta de trabajo crear este script, que llamará a los otros scripts:
 
 ```bash
 #!/bin/bash
@@ -29,14 +31,6 @@ phConfig="c05"  # configuracion, param fisicas WRF
 -y "RESULTS/${phConfig}_${YYYY}${MM}${DD}${HH}" \
 -d $nDiasPro \
 -g 0p25
-
-
-
-
-
-
-
-
 ```
 
 
