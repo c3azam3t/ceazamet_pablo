@@ -1,8 +1,9 @@
-en la carpeta de trabajo crear:
+en la carpeta de trabajo crear este script:
 
 ```bash
+#!/bin/bash
 
-fechaInicio="2024-06-04"
+fechaInicio="2025-05-02"
 HH="12"
 
 DD=$(dateNas +"%d" --date="$fechaInicio")
@@ -14,7 +15,7 @@ MMsst=$(dateNas +"%m" --date="$fechaInicio -1 day")
 YYYYsst=$(dateNas +"%Y" --date="$fechaInicio -1 day")
 
 nCores="64"
-nDiasPro="8.0" # decimal
+nDiasPro="8.0" # decimal, nDias proceso
 
 phConfig="c05"  # configuracion, param fisicas WRF
 
@@ -23,11 +24,16 @@ phConfig="c05"  # configuracion, param fisicas WRF
 -n $nCores \
 -h 1 \
 -p ${phConfig} \
--w "pili_${YYYY}${MM}${DD}" \
+-w "${YYYY}${MM}${DD}" \
 -x 2 \
--y "/geo/pablo/WRFOUT_pili/${phConfig}_${YYYY}${MM}${DD}${HH}" \
+-y "RESULTS/${phConfig}_${YYYY}${MM}${DD}${HH}" \
 -d $nDiasPro \
 -g 0p25
+
+
+
+
+
 
 
 
@@ -91,20 +97,11 @@ do
 	esac
 done
 
-
-#CFHOME=$(pwd)
-#PPP WRF4
-
-#CFHOME=/oceano/pablo/WRF4.1
-#WRFFOLDER=WRF-4.1.1
-
+# ruta donde se compilo el modelo
 CFHOME=/HPC/pablo/WRF4.3
+
 WRFFOLDER=WRF
-
-
-#MET_EM=${CFHOME}/run/${WPSRUNID}/${GFSRES}"_"${RUNDATE}
-#PPP WRF4
-MET_EM=/HPC/pablo/cfinder/run/${WPSRUNID}/${GFSRES}"_"${RUNDATE}
+MET_EM=${CFINDERHOME}/preproc/${WPSRUNID}/${GFSRES}"_"${RUNDATE}
 
 YYYY=${RUNDATE:0:4}
 MM=${RUNDATE:4:2}
@@ -157,8 +154,6 @@ if [ "$run_wrf" == "Yes" ]; then
 	rm -rf ${WRFRUN} || { echo "error en rm -rf ${WRFRUN} ... " ; exit 1; }
 	echo "copiando template wrf ..."
 
-	#cp -rf ${CFHOME}/WRFV3/test/template_em_real ${WRFRUN}
-	#PPP WRF4
 	cp -rf ${CFHOME}/${WRFFOLDER}/test/em_real ${WRFRUN}
 
 	cd ${WRFRUN}
@@ -245,10 +240,6 @@ if [ "$run_wrf" == "Yes" ]; then
         echo "/                                           " >> namelist.input
 
         #param fisicas
-        #cat ${CFHOME}/ph_configs/${PHID} >> namelist.input
-
-        #PPP 
-	
         cat ${CFINDERHOME}/ph_configs/${PHID} >> namelist.input
 
         echo " &fdda                                            " >> namelist.input
@@ -301,32 +292,7 @@ if [ "$run_wrf" == "Yes" ]; then
 	echo "#!/bin/bash" > slurm.sh
 	echo "#SBATCH -J ${jobName} 		                                            " >> slurm.sh
 
-	# si NHOSTS	esta definido
-#	if [ ! -z $NHOSTS ]; then 
-#		echo "#SBATCH -N ${NHOSTS}                                                    " >> slurm.sh
-#	fi
 
-	# determinar si entrar en part3, part2 o part1
-	freePart3=$(sinfo |grep part3|grep idle|awk '{print $4}')
-	freePart1=$(sinfo |grep part1|grep idle|awk '{print $4}')
-
-
-	[[  $freePart3 && ${freePart3-x} ]] &&  echo "" || freePart3=0;
-	[[  $freePart1 && ${freePart1-x} ]] &&  echo "" || freePart1=0;
-
-
-
-
-#	if [ $freePart3 -gt 1 ]; then
-#		echo "#SBATCH --partition=part3                                                   " >> slurm.sh
-#		echo "#SBATCH -n 24                                                               " >> slurm.sh
-#	elif [ $freePart1 -gt 0 ]; then
-#                echo "#SBATCH --partition=part1                                                   " >> slurm.sh
-#                echo "#SBATCH -n 16                                                               " >> slurm.sh
-#	else
-#                echo "#SBATCH --partition=part2                                                   " >> slurm.sh
-#                echo "#SBATCH -n 24                                                               " >> slurm.sh
-#	fi
 
 echo "#SBATCH --partition=debug                                                    " >> slurm.sh
 echo "#SBATCH -n ${NPROCS}                                                               " >> slurm.sh
@@ -339,26 +305,13 @@ echo "#SBATCH -n ${NPROCS}                                                      
 	if [ ! -z $RESULTSFOLDER ]; then 
 		echo "mkdir -p ${RESULTSFOLDER}/                 					      " >> slurm.sh
 
-#PPP	queda el de abajo comentada
 		echo "(mv -v wrfout_d* wrfxtrm_d* ${RESULTSFOLDER}/ ) && ( touch ${RESULTSFOLDER}/GFSGFSRESOLUTION_${GFSRES}  ) " >> slurm.sh
-#		echo "(cp    wrfout_d* wrfxtrm_d* ${RESULTSFOLDER}/ ) && ( touch ${RESULTSFOLDER}/GFSGFSRESOLUTION_${GFSRES}  ) " >> slurm.sh
-
-
 
 
 	fi
 
 	echo "encolando trabajo en slurm ..."
-#PPP
 	sbatch slurm.sh
-
-#PPP comentar!
-#        if [ ! -z $RESULTSFOLDER ]; then
-#                mkdir -p ${RESULTSFOLDER}/
-#                touch ${RESULTSFOLDER}/wrfout_prueba  
-#		touch ${RESULTSFOLDER}/GFSGFSRESOLUTION_${GFSRES}
-#        fi
-
 
 	sleep 2
 	squeue
@@ -369,3 +322,33 @@ echo ""
 
 
 ```
+
+
+Se necesita un subdirectorio ph_configs/ que contenga archivos como c00 o c05, que corresponden a las parametrizaciones físicas del modelo, por ejemplo para c00 (configuración por defecto que viene en WRF 4.3):
+
+```
+[pablo@diaguita /AUX/pablo/WRF_mayo2025 ]$ cat ph_configs/c00 
+&physics                 
+mp_physics               = 3,        3, 3
+ra_lw_physics            = 1,        1, 1
+ra_sw_physics            = 1,        1, 1
+radt                     = 30,       30,30
+sf_sfclay_physics        = 1,        1, 1
+sf_surface_physics       = 1,        1, 1
+bl_pbl_physics           = 1,        1, 1 
+bldt                     = 0,        0, 0
+cu_physics               = 1,        1, 1
+cudt                     = 5,        5, 5
+isfflx                   = 1,
+ifsnow                   = 0,
+icloud                   = 1,
+surface_input_source     = 1,
+num_soil_layers          = 5,
+maxiens                  = 1,
+maxens                   = 3,
+maxens2                  = 3,
+maxens3                  = 16,
+ensdim                   = 144,
+/
+```
+
