@@ -147,7 +147,7 @@ end
 exit 0
 ```
 
-descargar script: [downGfsHist_2024Junio.sh](CEAZA_FORECAST/scripts/preprocessing/wrf/downGfsHist_2024Junio.sh)
+descargar script: [downGfsHist_2024Junio.sh](downGfsHist_2024Junio.sh)
 
 * En cada enlace, las partes en negrita corresponden al año y a la fecha:
 		.../d084001/**2024**/**20240604**/gfs.0p25.**20240604**12.f384.grib2
