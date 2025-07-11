@@ -3,8 +3,10 @@
 crear estos 2 scripts en la carpeta de trabajo:
 
 ```bash
+#!/bin/bash
 
-fechaInicio="2024-06-04"
+
+fechaInicio="2025-05-01"
 HH="12"
 
 DD=$(dateNas +"%d" --date="$fechaInicio")
@@ -15,26 +17,35 @@ DDsst=$(dateNas +"%d" --date="$fechaInicio -1 day")
 MMsst=$(dateNas +"%m" --date="$fechaInicio -1 day")
 YYYYsst=$(dateNas +"%Y" --date="$fechaInicio -1 day")
 
-nDiasPre="8"     # entero, n° de dias a correr preproceso
+nDiasPre="8"     # entero
 
 # preproceso
-./correrPreprocesoConSST_hist.sh -a ${YYYY}${MM}${DD} \  # fecha
--b ${HH} \                                               # hora
--c "/geo/pablo/GFS_g2/ds084.1/${YYYY}${MM}${DD}" \       # rutaGFS
--d "/HPC/GFS_g2/sst.${YYYYsst}${MMsst}${DDsst}" \        # rutaSST
--e 0p25 \                                                # GFSRESOLUTION
--f "/HPC/pablo/WRF4.3/grillaWRFv17" \                    # WPSTEMPLATE ruta donde estan los archivos de dominio geo_em.d0*.nc
--g "/HPC/pablo/cfinder/run/pili_${YYYY}${MM}${DD}" \     # WPSRUN ruta donde se correra el preproceso
--h 2 \         # n° de dominios
--i $nDiasPre \ # n° de dias para dominio3, si hubiera
--j $nDiasPre \ # n° de dias para dominios 1 y 2
--k hist \      # tipo: hist={historico GFS}
--l nogeo       # no correr geogrid, eso de hace solo 1 vez cuando se define el dominio
+./correrPreprocesoConSST_hist.sh -a ${YYYY}${MM}${DD} -b ${HH} -c "/AUX/pablo/GFS_g2/ds084.1/${YYYY}${MM}${DD}" -d "/HPC/GFS_g2/sst.${YYYYsst}${MMsst}${DDsst}" -e 0p25 -f "/HPC/pablo/WRF4.3/grillaWRFv17" -g "/AUX/pablo/WRF_mayo2025/preproc/${YYYY}${MM}${DD}" -h 2 -i $nDiasPre -j $nDiasPre -k hist -l nogeo
+
+
 
 ```
 
+donde los parametros del script son:
 
-donde el script correrPreprocesoConSST_hist.sh es:
+```
+-a  # fecha
+-b  # hora
+-c  # rutaGFS
+-d  # rutaSST
+-e  # GFSRESOLUTION
+-f  # WPSTEMPLATE ruta donde estan los archivos de dominio geo_em.d0*.nc
+-g  # WPSRUN ruta donde se correra el preproceso
+-h  # n° de dominios
+-i  # n° de dias para dominio3, si hubiera
+-j  # n° de dias para dominios 1 y 2
+-k  # tipo: hist={historico GFS}
+-l  # no correr geogrid, eso de hace solo 1 vez cuando se define el dominio
+```
+
+
+
+y el script correrPreprocesoConSST_hist.sh es:
 
 ```bash
 #!/bin/bash
