@@ -1,6 +1,6 @@
 
 
-crear o copiar estos 2 scripts en la carpeta de trabajo:
+crear estos 2 scripts en la carpeta de trabajo:
 
 ```bash
 
