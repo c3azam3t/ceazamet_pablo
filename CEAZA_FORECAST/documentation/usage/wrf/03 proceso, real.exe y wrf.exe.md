@@ -28,7 +28,7 @@ phConfig="c05"  # configuracion, param fisicas WRF
 -p ${phConfig} \
 -w "${YYYY}${MM}${DD}" \
 -x 2 \
--y "RESULTS/${phConfig}_${YYYY}${MM}${DD}${HH}" \
+-y "/full/path/to/RESULTS/${phConfig}_${YYYY}${MM}${DD}${HH}" \
 -d $nDiasPro \
 -g 0p25
 ```
