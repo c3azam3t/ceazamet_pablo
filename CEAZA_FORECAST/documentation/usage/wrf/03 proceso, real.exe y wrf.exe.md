@@ -1,4 +1,4 @@
-En la etapa "proceso" se corre el modelo, son 2 los programas principales, real.exe y wrf.exe
+En la etapa "proceso" se corre el modelo, son 2 los programas principales: real.exe y wrf.exe
 
 en la carpeta de trabajo crear este script, que llamará a los otros scripts:
 
