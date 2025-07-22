@@ -72,24 +72,6 @@ set -x
 
 export run_ungrib=ungrib
 
-
-#if [ $# -lt 12 ]; then
-#	echo "./correrPreprocesoConSST.sh <StartForecast> <gfsHour> <rutaGfs> <rutaSST> <resGFS> <wpsTemplate> <wpsRun> <maxDom> <nDias> <nDiasdom1y2> <gfsVersion{op|hist}> <runGeogrid{geo|nogeo}>"
-#	echo "./correrPreprocesoConSST.sh 20180502"
-#	echo "                            00                                              "
-#	echo "                            /HPC/GFS_g2/20180502-00	                      "
-#	echo "                            /HPC/GFS_g2/sst.20180501	                      "
-#	echo "                            0p25		                                      "
-#	echo "                            /HPC/pablo/cfinder/3grillasOpCeaza	          "
-#	echo "                            /HPC/pablo/cfinder/run/manual_OP_20180502 	  "
-#	echo "                            3			                                      "
-#	echo "                            5		                                          "
-#	echo "                            10				                              "
-#	echo "                            op						                      "
-#	echo "                            nogeo"                                            
-#	exit 1
-#fi
-
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/wrf/LIBS/grib2/lib
 export logFile=/HPC/pablo/log.preproc.$(dateNas +%Y%m%d%H%M%S)
 
@@ -147,46 +129,6 @@ export gfsFolder=${rutaGFS}
 datelog " -- inicio script --"
 datelog "gfsFolder: $gfsFolder"
 
-#		#comprobar cantidad de archivos grib gfs
-#		nGribFiles=93  #para resoluciones 1p00 y 0p50
-#		if [ "$GFSRESOLUTION" == "0p25" ]; then
-#			nGribFiles=173
-#		fi
-#
-#		nFilesDown=$(ls $gfsFolder/gfs.*| grep $GFSRESOLUTION | grep t${HH}z |wc -l)
-#		while [ ${nFilesDown} -lt ${nGribFiles} ] ; do
-#			if [ $(ps xau|grep $USER|grep  "bajarGfs.sh ${DD} ${MM} ${YYYY} ${HH}"|grep -v grep|wc -l) -lt 1 ]; then
-#				datelog 'aun no corre script de descarga, iniciando ...'
-#				/HPC/pablo/cfinder/bajarGfs.sh ${DD} ${MM} ${YYYY} ${HH}
-#			fi
-#			datelog "cantidad de archivos grib (${nFilesDown}) es menor a ${nGribFiles}, esperando ..."
-#			sleep 60 #
-#			nFilesDown=$(ls $gfsFolder/gfs.*| grep "${GFSRESOLUTION}" | grep t${HH}z |wc -l)
-#		done
-#
-#		if [ "$GFSRESOLUTION" == "0p25" ]; then
-#			# como son archivos mas grandes, talvez hay que esperar a que terminen de descargar
-#			menorTam=$(du -sm $gfsFolder/gfs.t${HH}z.pgrb2.${GFSRESOLUTION}.f???|sort -n | head -1 |gawk '{print $1}')
-#			while [ $menorTam -lt 120 ] ; do
-#				datelog "tam menor: ${menorTam}, aun faltan por descargar totalmente algunos archivos, esperando ..."
-#				sleep 5
-#				menorTam=$(du -sm $gfsFolder/gfs.t${HH}z.pgrb2.${GFSRESOLUTION}.f???|sort -n | head -1 |gawk '{print $1}')
-#			done
-#		fi
-#
-#		datelog "cantidad de archivos grib OK."
-#
-#		# comprobar existencia de archivo grib sst
-#		/HPC/pablo/cfinder/bajarSstHrGrb.sh /HPC/GFS_g2 ${YYYYsst}${MMsst}${DDsst} 0.083
-#		while [ $(ls ${rutaSST}/rtgssthr_grb_* | grep grib2$ | wc -l) -lt 1 ] ; do
-#			datelog "no hay archivo grib SST, reintentando..."
-#			sleep 120
-#			/HPC/pablo/cfinder/bajarSstHrGrb.sh /HPC/GFS_g2 ${YYYYsst}${MMsst}${DDsst} 0.083	
-#		done
-#
-#
-#
-#		datelog "Archivo grib SST OK."
 
 
 datelog "copiando template WPS ..."
